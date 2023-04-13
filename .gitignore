@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 .hintrc
+
+### Java Project files ###
+cenrail-app/src/main/resources/application.properties
