@@ -34,10 +34,7 @@ public class PassengerService {
     
     public void updatePassenger(Passenger passenger) {
 
-        // validations to only update Passenger object if the value is different than
-		// null
-
-		passenger.setPassword(passenger.getPassword());
+    	passenger.setPassword(passenger.getPassword());
 		passenger.setFirstName(passenger.getFirstName());
 		passenger.setLastName(passenger.getLastName());
 		passenger.setAddress(passenger.getAddress());
