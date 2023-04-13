@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Register</title>
+</head>
+
+<body>
+	<div class="register">
+		<h1>Register</h1>
+		<form th:object="${registeredPassenger}" th:action="@{/register}" method="post">
+			<div class="cell-space">
+				<label for="username">User name:</label> <input type="text" id="username" th:field="*{userName}" />
+			
+
+			<div class="cell-space">
+				<label for="password">Password:</label> <input type="password" id="password" th:field="*{password}" />
+			
+			<div class="cell-space">
+				<label for="firstName">First Name:</label> <input type="text" id="firstName" th:field="*{firstName}" />
+			
+			<div class="cell-space">
+				<label for="lastName">Last Name:</label> <input type="text" id="lastName" th:field="*{lastName}" />
+			
+			<div class="cell-space">
+				<label for="email">Email:</label> <input type="email" id="email" th:field="*{email}" />
+				
+
+			<div class="cell-space">
+				<label for="age">Age:</label> <input type="text" class="age" id="age" th:field="*{age}" />
+			
+			<div class="cell-space">
+				<label for="phone">Phone:</label> <input type="text" id="phone" th:field="*{phone}" />
+				
+
+			<div class="cell-space">
+				<label for="regRender">Gender:</label> <select id="regRender" name="gender" th:field="*{gender}">
+					<option value="">Select Gender</option>
+					<option value="Male" th:text="Male"></option>
+					<option value="Female" th:text="Female"></option>
+					<option value="Other" th:text="Other"></option>
+				</select>
+				
+
+			<div class="cell-space">
+				<label for="address">Address:</label> <input type="text" id="address" th:field="*{address}" />
+				
+
+			<div class="cell-space">
+				<label for="city">City:</label> <input type="text" id="city" th:field="*{city}" />
+				
+
+			<div class="cell-space">
+				<label for="postalCode">Postal Code:</label> <input class="postalcode" type="text" id="postalCode"
+					th:field="*{postalCode}" />
+				<div class="cell-space">
+					<div>
+						<button type="submit" value="submit">Submit</button>
+					</div>
+
+		</form>
+	</div>
+</body>
+
+</html>
