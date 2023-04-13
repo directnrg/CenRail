@@ -113,5 +113,13 @@ public class LoginController {
 
 		return "redirect:/booking"; // 
 	}
-    
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+
+		// close session
+		session.invalidate();
+
+		return "redirect:/login-form";
+	}   
 }
