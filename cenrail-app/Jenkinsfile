@@ -14,17 +14,20 @@ pipeline {
         }
         stage('Build') {
             steps {
+                bat 'cd cenrail-app'
                 bat 'mvn clean package'
             }            
         }
         stage('Test') {
             steps {
+                bat 'cd cenrail-app'
                 bat 'mvn test'
             }            
         }
         stage('Deliver') {
         	steps {
         		script {
+                    bat 'cd cenrail-app'
                     bat 'docker build -t dew0135/cenrail:%BUILD_ID% .'
                 }
                 
