@@ -34,4 +34,4 @@ build/
 .hintrc
 
 ### Java Project files ###
-cenrail-app/src/main/resources/application.properties
+# cenrail-app/src/main/resources/application.properties
