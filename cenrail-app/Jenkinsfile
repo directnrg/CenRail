@@ -14,23 +14,25 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'cd cenrail-app'
-                bat 'mvn clean package'
+                dir('cenrail-app') {
+                    bat 'mvn clean package'
+                }
             }            
         }
         stage('Test') {
             steps {
-                bat 'cd cenrail-app'
-                bat 'mvn test'
+                dir('cenrail-app') {
+                    bat 'mvn test'
+                }
             }            
         }
         stage('Deliver') {
         	steps {
         		script {
-                    bat 'cd cenrail-app'
-                    bat 'docker build -t dew0135/cenrail:%BUILD_ID% .'
+                    dir('cenrail-app') {
+                        bat 'docker build -t dew0135/cenrail:%BUILD_ID% .'
+                    }
                 }
-                
                 
                 script {
                     withCredentials([usernamePassword(credentialsId: 'b9385f93-e054-4684-850f-3a9bfa2f2fba', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
