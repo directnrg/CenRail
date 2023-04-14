@@ -9,7 +9,7 @@ pipeline {
         stage('Check out') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/yiseul128/CenRail.git'
+                git branch: 'yiseul', url: 'https://github.com/yiseul128/CenRail.git'
             }
         }
         stage('Build') {
