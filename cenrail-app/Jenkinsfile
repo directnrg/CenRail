@@ -60,7 +60,7 @@ pipeline {
 						)
 						'''
 
-                    docker.image("dew0135/cenrail:${BUILD_ID}").run("-p 8081:8081 --name cenrail")
+                    docker.image("dew0135/cenrail:${BUILD_ID}").run("-p --network=host -p 27017:27017 -p 8081:8081 --name cenrail")
                 }
             }
         }
