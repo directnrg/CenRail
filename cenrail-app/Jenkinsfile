@@ -9,7 +9,7 @@ pipeline {
         stage('Check out') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/yiseul128/CenRail.git'
+                git branch: 'yiseul', url: 'https://github.com/yiseul128/CenRail.git'
             }
         }
         stage('Build') {
@@ -26,6 +26,20 @@ pipeline {
                 }
             }            
         }
+        stage('Code Coverage') {
+        	steps {
+                dir('cenrail-app') {
+        	        jacoco()
+                }
+        	}
+		}
+        stage('Code Static Analysis') {
+        	steps {
+                dir('cenrail-app') {
+        	        bat 'mvn pmd:pmd checkstyle:checkstyle spotbugs:spotbugs -X'
+                }
+        	}
+		}
         stage('Deliver') {
         	steps {
         		script {

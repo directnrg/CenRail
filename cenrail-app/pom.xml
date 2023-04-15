@@ -53,6 +53,46 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.20.0</version>
+				<configuration>
+					<linkXRef>true</linkXRef>
+					<minimumTokens>100</minimumTokens>
+					<targetJdk>1.8</targetJdk>
+					<format>xml</format>
+					<outputDirectory>reports/pmd/</outputDirectory>
+					<targetDirectory>reports/pmd/</targetDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>pmd</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<failsOnError>false</failsOnError>
+					<outputFile>reports/checkstyle/checkstyle-result.xml</outputFile>
+				</configuration>
+			</plugin>
+			<plugin>
+			    <groupId>com.github.spotbugs</groupId>
+			    <artifactId>spotbugs-maven-plugin</artifactId>
+			    <version>4.5.2.0</version>
+			    <configuration>
+			        <effort>Max</effort>
+			        <threshold>Low</threshold>
+			    </configuration>
+			</plugin>
 		</plugins>
 		<finalName>cenrail</finalName>
 	</build>
