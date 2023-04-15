@@ -61,6 +61,10 @@ public class Passenger {
 		return passengerId;
 	}
 
+	public void setPassengerId(String passengerId) {
+		this.passengerId = passengerId;
+	}
+
 	public String getUserName() {
 		return userName;
 	}

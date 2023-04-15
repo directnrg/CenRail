@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Profile Page</title>
+	<link th:href="@{/css/styles.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+
+<body>
+	<!-- BOOTSTRAP NAV BAR -->
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="navbar-nav">
+			<a class="nav-item nav-link active" th:href="@{/profile}" rel="Profile Page" id="link">Profile<span
+					class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" th:href="@{/booking}" rel="Booking Page" id="link">Booking</a>
+
+			<a class="nav-item nav-link" th:href="@{/logout}" rel="Log In Page" id="link">Log Out</a>
+		</div>
+	</nav>
+	<!-- BOOTSTRAP NAV BAR END-->
+
+	<div class="profile">
+		<form th:object="${passenger}" method="post">
+			<div class="cell-space">
+				<h2>Profile Details</h2>
+			</div>
+
+			<div class="cell-space">
+				<label>User Name:</label>
+				<span th:text="*{userName}"></span>
+
+				<label class="label-password right">Password:</label>
+				<span th:text="*{password}"></span>
+			</div>
+			<div class="cell-space">
+				<label>First Name:</label>
+				<span th:text="*{firstName}"></span>
+
+				<label class="label-lastname right">Last Name:</label>
+				<span th:text="*{lastName}"></span>
+			</div>
+			<div class="cell-space">
+				<label>Address:</label>
+				<span th:text="*{address}"></span>
+
+				<label class="label-city">City:</label>
+				<span th:text="*{city}"></span>
+			</div>
+			<div class="cell-space">
+				<label>Postal Code:</label>
+				<span th:text="*{postalCode}"></span>
+
+				<label class="label-phone"> Phone:</label>
+				<span th:text="*{phone}"></span>
+			</div>
+
+			<div class="cell-space">
+				<label>Email:</label>
+				<span th:text="*{email}"></span>
+
+				<label class="label-age">Age:</label>
+				<span th:text="*{age}"></span>
+			</div>
+
+			<div class="cell-space">
+				<a th:href="@{/update-profile}" class="btn btn-primary">Update Profile</a>
+			</div>
+		</form>
+
+	</div>
+</body>
+
+</html>
