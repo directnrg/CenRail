@@ -26,6 +26,20 @@ pipeline {
                 }
             }            
         }
+        stage('Code Coverage') {
+        	steps {
+                dir('cenrail-app') {
+        	        jacoco()
+                }
+        	}
+		}
+        stage('Code Static Analysis') {
+        	steps {
+                dir('cenrail-app') {
+        	        bat 'mvn pmd:pmd checkstyle:checkstyle -X'
+                }
+        	}
+		}
         stage('Deliver') {
         	steps {
         		script {
