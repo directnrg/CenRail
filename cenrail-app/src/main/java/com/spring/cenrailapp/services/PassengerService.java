@@ -50,4 +50,10 @@ public class PassengerService {
     public void deletePassengerById(String id) {
         passengerRepository.deleteById(id);
     }
+
+    public void addPassengerTerms(Passenger passenger, boolean termsAcceptance){
+        System.out.println("passenger object at addPassengerTerms(): " + passenger);
+        passenger.setTermsAcceptance(termsAcceptance);
+        passengerRepository.save(passenger);
+        }
 }
