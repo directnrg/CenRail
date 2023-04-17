@@ -57,6 +57,8 @@ public class Passenger {
 	@Pattern(regexp="^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$", message = "Email is not of requested format (abc@gmail.com)")
 	private String email;
 
+	private boolean termsAcceptance;
+
 	public String getPassengerId() {
 		return passengerId;
 	}
@@ -151,6 +153,14 @@ public class Passenger {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isTermsAcceptance() {
+		return termsAcceptance;
+	}
+
+	public void setTermsAcceptance(boolean termsAcceptance) {
+		this.termsAcceptance = termsAcceptance;
 	}
 
 	// Default constructor

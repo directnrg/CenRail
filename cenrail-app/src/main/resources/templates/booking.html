@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -6,9 +7,100 @@
 	<meta charset="UTF-8">
 	<title>Rail Tickets</title>
 	<link rel="stylesheet" th:href="@{css/styles.css}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+
 </head>
 
 <body class="back-image">
- <div>Booking Page</div>
+
+	<!-- BOOTSTRAP NAV BAR -->
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="navbar-nav">
+			<a class="nav-item nav-link active" th:href="@{/profile}" rel="Profile Page" id="profileLink">Profile<span
+					class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" th:href="@{/logout}" rel="Login Page" id="loginLink">Log Out</a>
+		</div>
+	</nav>
+
+	<!-- BOOTSTRAP NAV BAR END-->
+	<h2 class="text-center pt-5">Welcome to CenRail</h2>
+	<div class="container d-flex align-items-center justify-content-center">
+		<form id="form" class="row g-6" th:action="@{/booking}" novalidate th:object="${journey}" method="post">
+
+			<!-- RESERVATION SECTION -------------------------------------------------->
+
+			<div class="row g-3 form-container p-5">
+				<div class="col-md-6 mb-3">
+					<label class="form-label" for="reservation">Reservation Class</label>
+					<select class="form-select" id="reservation" name="reservation" th:field="*{reservationClass}">
+						<option th:each="reservation : ${reservationTypes}" th:value="${reservation}"
+							th:text="${reservation}"></option>
+					</select>
+				</div>
+				<div class="col-md-6 mb-3">
+					<label class="form-label" for="trainName">Train Name or
+						number:</label> <select class="form-select dropdown-toggle" name="trainName" title="trainName"
+						th:field="*{trainName}">
+						<option value="" selected disabled>Select a train</option>
+						<option th:each="train : ${trainsList}" th:value="${train}" th:text="${train}"></option>
+					</select>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label class="form-label" for="journeyFrom">Travel From:</label>
+					<select class="form-select" id="journeyFrom" name="journeyFrom" th:field="*{journeyFrom}">
+						<option value="">Please Select</option>
+						<option th:each="city : ${citiesList}" th:value="${city}" th:text="${city}"></option>
+					</select>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label class="form-label" for="journeyTo">Travel
+						Destination:</label> <select class="form-select" id="journeyTo" name="journeyTo"
+						th:field="*{journeyTo}">
+						<option default value="">Please Select</option>
+						<option th:each="city : ${citiesList}" th:value="${city}" th:text="${city}"></option>
+					</select>
+				</div>
+				<div class="col-md-4 mb-3">
+					<label class="form-label" for="departureDate">Travel Date:</label>
+					<input class="form-control border border-secondary rounded" type="date" id="departureDate"
+						name="departureDate" th:field="*{departureDate}" placeholder="mm/dd/yyyy">
+				</div>
+				<div class="col-md-2">
+					<label class="form-label" for="berth">Berth Choice:</label> <select class="form-select" id="berth"
+						name="berth" th:field="*{berthChoice}">
+						<option value="">Please Select</option>
+						<option th:each="berth : ${berthsList}" th:value="${berth}" th:text="${berth}"></option>
+					</select>
+				</div>
+
+				<div class="col-md-2 mb-3">
+					<label class="form-label" for="numPassengers">No. of
+						Passengers:</label> <input class="form-control" type="number" id="numPassengers" placeholder="--"
+						name="numPassengers" th:field="*{numPassengers}"/>
+				</div>
+
+				<!-- PASSENGER INFORMATION SECTION -------------------------------------------------->
+
+				<div th:object="${TermsAcceptanceDTO}">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" title="termsAcceptance"
+							th:field="*{termsAcceptance}" id="termsAcceptance"> <label
+							class="form-check-label" for="termsAcceptance"> Agree to
+							terms and conditions </label>
+					</div> 
+
+					<div class="text-center">
+						<input class="btn btn-primary margin-right-10px" type="submit" value="Submit">
+						<input class="btn btn-secondary" type="reset" value="Clear Form">
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
 </body>
+
 </html>
