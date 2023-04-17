@@ -38,7 +38,7 @@
 						<div class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 
 						<label for="ccnum">Credit Card Number: </label>
-						<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
+						<input type="text" id="ccnum" name="cardnumber" placeholder="1111222233334444"
 							th:field="*{cardNumber}">
 						<div class="error-message" th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></div>
 					</div>
