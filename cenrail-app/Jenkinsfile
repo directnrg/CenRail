@@ -9,20 +9,25 @@ pipeline {
         stage('Check out') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/yiseul128/CenRail.git'
+                git branch: 'yiseul', url: 'https://github.com/yiseul128/CenRail.git'
             }
         }
+
         stage('Build') {
             steps {
-                dir('cenrail-app') {
-                    bat 'mvn clean package'
-                }
+                withCredentials([string(credentialsId: '33982060-806f-4a1c-b884-2704a554716b', variable: 'MONGODB_URI')]) {
+                    dir('cenrail-app') {
+                        bat 'mvn clean package -D MONGODB_URI=%MONGODB_URI%'
+                    }
+                } 
             }            
         }
         stage('Test') {
             steps {
-                dir('cenrail-app') {
-                    bat 'mvn test'
+                withCredentials([string(credentialsId: '33982060-806f-4a1c-b884-2704a554716b', variable: 'MONGODB_URI')]) {
+                    dir('cenrail-app') {
+                        bat 'mvn test -D MONGODB_URI=%MONGODB_URI%'
+                    }
                 }
             }            
         }
