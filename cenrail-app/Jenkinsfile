@@ -15,18 +15,18 @@ pipeline {
 
         stage('Build') {
             steps {
-                withCredentials([string(credentialsId: '33982060-806f-4a1c-b884-2704a554716b', variable: 'MONGODB_URI')]) {
+                withCredentials([string(credentialsId: '27f90913-5388-47d6-a1ef-037d43d651bb', variable: 'MONGODB_PW')]) {
                     dir('cenrail-app') {
-                        bat 'mvn clean package -D MONGODB_URI=%MONGODB_URI%'
+                        bat 'mvn clean package -D MONGODB_PW=%MONGODB_PW%'
                     }
                 } 
             }            
         }
         stage('Test') {
             steps {
-                withCredentials([string(credentialsId: '33982060-806f-4a1c-b884-2704a554716b', variable: 'MONGODB_URI')]) {
+                withCredentials([string(credentialsId: '27f90913-5388-47d6-a1ef-037d43d651bb', variable: 'MONGODB_PW')]) {
                     dir('cenrail-app') {
-                        bat 'mvn test -D MONGODB_URI=%MONGODB_URI%'
+                        bat 'mvn test -D MONGODB_PW=%MONGODB_PW%'
                     }
                 }
             }            
