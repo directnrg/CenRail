@@ -1,6 +1,6 @@
 package com.spring.cenrailapp.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,6 @@ import java.util.Map;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
@@ -75,10 +74,9 @@ public class Journey {
 	@NotBlank(message = "Train Name field is required")
 	private String trainName;
 
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@NotNull(message = "This field is required") 
 	@FutureOrPresent(message = "We have not invented a time machine yet!. Only present or future date is allowed") 
-	private LocalDate departureDate;
+	private LocalDateTime departureDate;
 
 	@NotBlank(message = "Berth choice field is required")
 	private String berthChoice;
@@ -123,11 +121,11 @@ public class Journey {
 		this.trainName = trainName;
 	}
 
-	public LocalDate getDepartureDate() {
+	public LocalDateTime getDepartureDate() {
 		return departureDate;
 	}
 
-	public void setDepartureDate(LocalDate departureDate) {
+	public void setDepartureDate(LocalDateTime departureDate) {
 		this.departureDate = departureDate;
 	}
 
@@ -230,7 +228,7 @@ public class Journey {
 		// populating available trains
 		trainsList = new ArrayList<>();
 		trainsList.add("Ocean");
-		trainsList.add("Montreal to Halifax");
+		trainsList.add("Alouette");
 		trainsList.add("600");
 		trainsList.add("604");
 		trainsList.add("606");
@@ -291,7 +289,7 @@ public class Journey {
 	}
 
 	//method to format date in the desired pattern
-	public void formatDepartureDate(LocalDate date) {
+	public void formatDepartureDate(LocalDateTime date) {
 		String pattern = "MM/dd/yyyy";		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 		String formattedDate = formatter.format(date);
