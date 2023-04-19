@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+option[value=""] {
+	color: #d8d8d8;
+}
+
+button.btn.disabled {
+	color: #000000;
+}
+
+.back-image {
+	background-image: url('/imgs/pexels-daniel-frese-543223.png');
+	background-blend-mode: multiply;
+	background-size: cover;
+}
+
+.margin-right-10px {
+	margin-right: 10px;
+}
+
+.bg-opacity-50 {
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+.login, .register, .show-ticket, .profile, .update-profile {
+	background-color: rgb(173, 216, 230);
+	width: 500px;
+	height: 290px;
+	text-align: center;
+	border-radius: 20px;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	font-size: 19px;
+}
+
+button {
+	font-size: 15px;
+	margin-top: 10px;
+
+}
+
+.cell-space {
+	padding: 5px;
+
+}
+
+/* REGISTER */
+.register {
+	height: auto;
+	text-align: left;
+	padding-left: 90px;
+	padding-right: 90px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	width: 500px;
+	margin-top: 50px;
+
+}
+
+
+/* PAYMENT */
+.payment {
+	background-color: rgb(173, 216, 230);
+	height: auto;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	padding-left: 130px;
+	padding-right: 130px;
+	padding-bottom: 40px;
+	padding-top: 40px;
+	border-radius: 20px;
+	width: 1000px;
+	font-size: 17px;
+
+}
+
+.cvv {
+	width: 50px;
+}
+
+.amountpaid, .expiry {
+	width: 100px;
+}
+
+
+/* TICKET CONFIRMATION */
+.show-ticket {
+	width: 800px;
+	height: auto;
+	text-align: left;
+	padding-left: 50px;
+	padding-bottom: 40px;
+	padding-top: 40px;
+	border-spacing: 0 40px;
+	margin-top: 10px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td {
+	padding-left: .5em;
+	padding-right: .5em;
+}
+
+
+.table-space {
+	white-space: pre-line;
+}
+
+table.table-space th {
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* PROFILE  */
+
+.profile {
+	width: min-content;
+	height: auto;
+	text-align: left;
+	padding-left: 50px;
+	padding-bottom: 40px;
+	padding-top: 40px;
+	border-spacing: 0 40px;
+	margin-top: 10px;
+}
+
+
+
+/* UPDATE PROFILE */
+.update-profile {
+	width: 700px;
+	height: auto;
+	text-align: left;
+	padding-left: 50px;
+	padding-bottom: 40px;
+	padding-top: 40px;
+	border-spacing: 0 40px;
+	margin-top: 70px;
+}
+
+.postalcode, .age {
+	width: 100px;
+}
+
+.label-password {
+	padding-left: 20px;
+}
+
+.label-lastname {
+	padding-left: 70px;
+	text-align: right;
+}
+
+.label-city {
+	padding-left: 70px;
+	text-align: right;
+}
+
+.label-phone {
+	padding-left: 70px;
+	text-align: right;
+}
+
+.label-age {
+	padding-left: 60px;
+	text-align: right;
+}
+
+.labels-journey {
+	padding-left: 50px;
+}
+
+.error-message {
+	color: red;
+	font-size: 14px;
+	margin-top: 5px;
+  }
