@@ -24,6 +24,10 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
+    public List<Ticket> getTicketsByPassengerId(String passengerId) {
+        return ticketRepository.findAllByPassengerId(passengerId);
+    }
+
     public Optional<Ticket> getTicketById(String id) {
         return ticketRepository.findById(id);
     }

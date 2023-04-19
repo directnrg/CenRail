@@ -72,6 +72,33 @@
 			</div>
 		</form>
 
+		<!--Ticket Details-->
+		<table class="table-space">
+			<thead>
+				<tr>
+					<th>Ticket No</th>
+					<th>Reservation Class</th>
+					<th>Journey From</th>
+					<th>Journey To</th>
+					<th>Berth Choice</th>
+					<th>Formatted Date</th>
+					<th>Status</th>
+					<th>Amount Paid</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="ticket : ${tickets}">
+					<td th:text="${ticket.ticketNo}"></td>
+					<td th:text="${ticket.journey.reservationClass}"></td>
+					<td th:text="${ticket.journey.journeyFrom}"></td>
+					<td th:text="${ticket.journey.journeyTo}"></td>
+					<td th:text="${ticket.journey.berthChoice}"></td>
+					<td th:text="${ticket.journey.formattedDate}"></td>
+					<td th:text="${ticket.status}"></td>
+					<td th:text="${ticket.amountPaid}"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 

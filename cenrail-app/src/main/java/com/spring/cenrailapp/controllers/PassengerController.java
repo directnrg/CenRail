@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.spring.cenrailapp.models.Passenger;
 import com.spring.cenrailapp.services.PassengerService;
+import com.spring.cenrailapp.services.TicketService;
 import com.spring.cenrailapp.utils.SessionUtil;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,9 @@ import jakarta.validation.Valid;
 public class PassengerController {
     @Autowired
 	private PassengerService passengerService;
+
+	@Autowired
+	private TicketService ticketService;
 
 	@GetMapping("/profile")
 	public String getProfilePage(HttpSession session,
@@ -38,6 +42,8 @@ public class PassengerController {
 		Passenger dbPassenger = passengerService.getPassengerByuserName(loggedPassenger.getUserName());
 		// add passenger to model
 		model.addAttribute("passenger", dbPassenger);
+
+		model.addAttribute("tickets", ticketService.getTicketsByPassengerId(dbPassenger.getPassengerId()));
 
 		return "profile";
 	}

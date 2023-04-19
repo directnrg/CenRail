@@ -12,18 +12,19 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/yiseul128/CenRail.git'
             }
         }
+
         stage('Build') {
             steps {
                 dir('cenrail-app') {
                     bat 'mvn clean package'
-                }
+                }                
             }            
         }
         stage('Test') {
             steps {
                 dir('cenrail-app') {
                     bat 'mvn test'
-                }
+                }                
             }            
         }
         stage('Code Coverage') {
