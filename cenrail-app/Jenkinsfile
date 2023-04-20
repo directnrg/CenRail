@@ -9,7 +9,7 @@ pipeline {
         stage('Check out') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/yiseul128/CenRail.git'
+                git branch: 'yiseul', url: 'https://github.com/yiseul128/CenRail.git'
             }
         }
 
@@ -76,6 +76,27 @@ pipeline {
 						'''
 
                     docker.image("dew0135/cenrail:${BUILD_ID}").run("-p 8081:8081 --name cenrail")
+                }
+            }
+        }
+        stage('Deploy to QAT') {
+            steps {
+                script {
+                	bat 'echo "Deploying to QAT..."'
+                }
+            }
+        }
+        stage('Deploy to STAGING') {
+            steps {
+                script {
+                	bat 'echo "Deploying to STAGING..."'
+                }
+            }
+        }
+        stage('Deploy to PROD') {
+            steps {
+                script {
+                	bat 'echo "Deploying to PROD..."'
                 }
             }
         }
