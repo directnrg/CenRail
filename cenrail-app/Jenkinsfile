@@ -79,5 +79,26 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to QAT') {
+            steps {
+                script {
+                	bat 'echo "Deploying to QAT..."'
+                }
+            }
+        }
+        stage('Deploy to STAGING') {
+            steps {
+                script {
+                	bat 'echo "Deploying to STAGING..."'
+                }
+            }
+        }
+        stage('Deploy to PROD') {
+            steps {
+                script {
+                	bat 'echo "Deploying to PROD..."'
+                }
+            }
+        }
     }
 }
