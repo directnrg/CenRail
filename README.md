@@ -32,7 +32,8 @@ CenRail is a train ticket booking application built using Spring Boot, Java, Mav
 4. Click the "Submit" button to proceed with the booking. You will be redirected to the payment page.
 
 ## Payment
-
+> [!NOTE]
+> this feature is not fully implemented to showcase how the app processes or not a ticket creation only if the card format is correct. A proper payment system can be integrated, but the current app assumes uses a simple validation just for demostration purposes.
 1. On the payment page, enter your card details:
    - Cardholder name
    - Card number
