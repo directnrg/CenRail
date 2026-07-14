@@ -19,13 +19,7 @@
 			
 			<div class="cell-space">
 				<label>User Name:</label>
-				<input title="userName" type="text" th:value="*{userName}" th:field="*{userName}" readonly />
-				<!-- <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" ></div> -->
-			</div>
-			<div class="cell-space">
-				<label>Password:</label>
-				<input title="password" type="text" th:value="*{password}" th:field="*{password}" />
-				<div class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+				<span th:text="${userName}"></span>
 			</div>
 			<div class="cell-space">
 				<label>First Name:</label>

@@ -96,6 +96,10 @@ public class Journey {
 
 	private String formattedDate;
 
+	// Id of the passenger who created this journey/booking, used to make sure
+	// the payment and ticket-confirmation pages can't be viewed by anyone else.
+	private String passengerId;
+
 	// Getters and Setters
 	public String getTrainCode() {
 		return trainCode;
@@ -206,9 +210,17 @@ public class Journey {
 	public String getFormattedDate() {
 		return formattedDate;
 	}
-	
+
 	public void setFormattedDate(String formattedDate) {
 		this.formattedDate = formattedDate;
+	}
+
+	public String getPassengerId() {
+		return passengerId;
+	}
+
+	public void setPassengerId(String passengerId) {
+		this.passengerId = passengerId;
 	}
 
 	// default constructor

@@ -1,5 +1,7 @@
 package com.spring.cenrailapp.controllers;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,27 +29,22 @@ public class TicketController {
 	public String getConfirmationPage(@PathVariable String ticketId,
 			HttpSession session, Model model) {
 		if (!SessionUtil.checkSession(session)) {
-			System.out.println("Passenger Object was found null, returning to /login-form");
 			return "redirect:/login-form";
 		}
 
 		Passenger loggedPassenger = (Passenger) session.getAttribute("loggedPassenger");
 		Passenger dbPassenger = passengerService.getPassengerByuserName(loggedPassenger.getUserName());
 
-		model.addAttribute("passenger", dbPassenger);
+		Ticket dbTicket = ticketService.getTicketById(ticketId).orElse(null);
 
-		// handling nullability of journey
-		try {
-			Ticket dbTicket = ticketService.getTicketById(ticketId).orElse(null);
-
-			System.out.println("Journey object inside Ticket at - /ticket-confirmation: " + dbTicket.getJourney());
-			model.addAttribute("ticketJourney", dbTicket.getJourney());
-
-			session.setAttribute("PaidTicket", dbTicket);
-		} catch (Exception e) {
-			System.out.println("Journey object inside Ticket was found null. returning to /booking");
+		// ticket must exist and belong to the logged-in passenger
+		if (dbTicket == null || !Objects.equals(dbTicket.getPassengerId(), dbPassenger.getPassengerId())) {
 			return "redirect:/booking";
 		}
+
+		model.addAttribute("passenger", dbPassenger);
+		model.addAttribute("ticketJourney", dbTicket.getJourney());
+		session.setAttribute("PaidTicket", dbTicket);
 
 		return "ticket-confirmation";
 	}

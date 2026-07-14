@@ -35,4 +35,4 @@ build/
 .env
 
 ### Java Project files ###
-# cenrail-app/src/main/resources/application.properties
+cenrail-app/src/main/resources/application-local.properties

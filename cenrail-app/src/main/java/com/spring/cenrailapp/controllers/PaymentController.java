@@ -1,10 +1,11 @@
 package com.spring.cenrailapp.controllers;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,30 +41,31 @@ public class PaymentController {
 	private PassengerService passengerService;
 
     @GetMapping("/payment/{journeyId}")
-	public String getPaymentPage(@PathVariable String journeyId, Payment payment, Model model) {
+	public String getPaymentPage(@PathVariable String journeyId, Payment payment, HttpSession session, Model model) {
 
-		// block to check if nullability of journey.
-		try {
-			Journey journey = journeyService.getJourneyById(journeyId).orElse(null);
+		if (!SessionUtil.checkSession(session)) {
+			return "redirect:/login-form";
+		}
 
-			// debug
-			System.out.println("inside GET /payment");
-			System.out.println("Price from journey session GET /payment: " + journey.getTicketPrice());
+		Passenger loggedPassenger = (Passenger) session.getAttribute("loggedPassenger");
+		Passenger dbPassenger = passengerService.getPassengerByuserName(loggedPassenger.getUserName());
 
-			double ticketPrice = journey.getTicketPrice();
+		Journey journey = journeyService.getJourneyById(journeyId).orElse(null);
 
-			// passing the journey calculated attribute to the payment object to display it
-			// in the view
-			payment.setTotalFare(ticketPrice);
-
-			model.addAttribute("payment", payment);
-			// adding journey Id to the model to access it in the post method of payment
-			model.addAttribute("journeyId", journeyId);
-
-		} catch (Exception e) {
-			System.out.println("Journey Object was found null, returning to /booking. Error: " + e.getMessage());
+		// journey must exist and belong to the logged-in passenger
+		if (journey == null || !Objects.equals(journey.getPassengerId(), dbPassenger.getPassengerId())) {
 			return "redirect:/booking";
 		}
+
+		double ticketPrice = journey.getTicketPrice();
+
+		// passing the journey calculated attribute to the payment object to display it
+		// in the view
+		payment.setTotalFare(ticketPrice);
+
+		model.addAttribute("payment", payment);
+		// adding journey Id to the model to access it in the post method of payment
+		model.addAttribute("journeyId", journeyId);
 
 		return "payment";
 	}
@@ -75,32 +77,25 @@ public class PaymentController {
 
 		// validate session
 		if (!SessionUtil.checkSession(session)) {
-			System.out.println("Passenger Object was found null, returning to /login-form");
 			return "redirect:/login-form";
 		}
 
-		// debug errors
-		//System.out.println("inside POST /payment");
-		if (result.hasErrors()) {
-			// get all field errors
-			System.out.println("Errors in fields");
-			for (FieldError error : result.getFieldErrors()) {
-				System.out.println(String.format("field Rejected: %s", error.getField()));
-				System.out.println(String.format("Value Rejected: %s", error.getRejectedValue()));
-				System.out.println(String.format("Custom error field message: %s", error.getDefaultMessage()));
-			}
+		Passenger loggedPassenger = (Passenger) session.getAttribute("loggedPassenger");
+		Passenger dbPassenger = passengerService.getPassengerByuserName(loggedPassenger.getUserName());
 
+		Journey dbJourney = journeyService.getJourneyById(journeyId).orElse(null);
+
+		// journey must exist and belong to the logged-in passenger
+		if (dbJourney == null || !Objects.equals(dbJourney.getPassengerId(), dbPassenger.getPassengerId())) {
+			return "redirect:/booking";
+		}
+
+		if (result.hasErrors()) {
 			//returning back the journeyId value to the model
 			model.addAttribute("journeyId", journeyId);
 
 			return "payment";
 		}
-
-		// Saved journey in session
-		Passenger loggedPassenger = (Passenger) session.getAttribute("loggedPassenger");
-
-		Journey dbJourney = journeyService.getJourneyById(journeyId).orElse(null);
-		Passenger dbPassenger = passengerService.getPassengerByuserName(loggedPassenger.getUserName());
 
 		// ticket saved to repo
 		Ticket dbTicket = ticketService.createTicket(paidTicket, dbJourney, dbPassenger, payment);
@@ -109,5 +104,5 @@ public class PaymentController {
 
 		return "redirect:/ticket-confirmation/" + dbTicket.getTicketNo();
 
-	} 
+	}
 }
