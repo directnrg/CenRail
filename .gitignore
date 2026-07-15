@@ -1,5 +1,6 @@
 HELP.md
 target/
+cenrail-app/reports/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -35,4 +36,4 @@ build/
 .env
 
 ### Java Project files ###
-# cenrail-app/src/main/resources/application.properties
+cenrail-app/src/main/resources/application-local.properties

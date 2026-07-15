@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,16 +30,7 @@ public class RegisterController {
 	@PostMapping("/register")
 	public String addNewUser(@Valid @ModelAttribute("registeredPassenger") Passenger passenger, BindingResult result,
 			RedirectAttributes redirectAttributes, Model model) {
-		// for debugging purposes if errors exist
 		if (result.hasErrors()) {
-			// get all field errors
-			System.out.println("Errors in fields");
-			for (FieldError error : result.getFieldErrors()) {
-				System.out.println(String.format("field Rejected: %s", error.getField()));
-				System.out.println(String.format("Value Rejected: %s", error.getRejectedValue()));
-				System.out.println(String.format("Custom error field message: %s", error.getDefaultMessage()));
-			}
-
 			// to display lists again an passenger inserted information after validation
 			model.addAttribute("registeredPassenger", passenger);
 
@@ -52,10 +42,9 @@ public class RegisterController {
 		// friendly message is provided after registering when redirected to login
 		String regMessage = "Thanks For Registering to CenRail. Please Login";
 
-		// added to database
+		// added to database (password is hashed inside createPassenger)
 		passengerService.createPassenger(passenger);
 
-		System.out.println("getRegisterPage passenger: " + passenger);
 		redirectAttributes.addFlashAttribute("regMessage", regMessage);
 		return "redirect:/login-form";
 	}

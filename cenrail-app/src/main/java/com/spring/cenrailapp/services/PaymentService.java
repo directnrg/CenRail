@@ -26,9 +26,15 @@ public class PaymentService {
     public Payment addPayment(Ticket ticket, Payment payment) {
 
         payment.setStatus("Approved");
-
         payment.setTicket(ticket);
-        
+
+        // Only the last 4 digits of the card are ever persisted; the full
+        // PAN and CVV are validated in-memory and discarded.
+        String cardNumber = payment.getCardNumber();
+        if (cardNumber != null && cardNumber.length() >= 4) {
+            payment.setCardLast4(cardNumber.substring(cardNumber.length() - 4));
+        }
+
         return paymentRepository.save(payment);
     }
     
