@@ -1,6 +1,6 @@
 server.port=8081
 #DataSource Configuration
-spring.data.mongodb.uri=mongodb+srv://${DB_USER}:${MONGODB_PW}@cenrail.2xc6obg.mongodb.net/?appName=cenrail
+spring.data.mongodb.uri=mongodb+srv://${DB_USER}:${MONGODB_PW}@cenrail.2xc6obg.mongodb.net/
 spring.data.mongodb.database=cenrail
 #logging.level.org.springframework=INFO
 
